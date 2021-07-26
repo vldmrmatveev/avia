@@ -1,0 +1,7 @@
+.form-search
+	form.form(action="" name="searchTickets")  
+		input(type="text" placeholder="Откуда" autocomplete="off" name="from" required spellcheck="false").form__input.form__item
+		input(type="text" placeholder="Куда"  autocomplete="off" name="to" required spellcheck="false").form__input.form__item
+		input(type="date" placeholder="Туда" name="from-date" required).form__input.form__item
+		input(type="date" placeholder="Обратно" name="to-date" disabled="disabled").form__input.form__item
+		button.form__item.form__btn Начать
