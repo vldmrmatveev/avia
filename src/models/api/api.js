@@ -4,15 +4,6 @@ class Api {
 	constructor(url) {
 		this.url = url;
 	}
-	// async countries() {
-	// 	try {
-	// 		const response = await fetch(`${this.url}/countries`);
-	// 		const countriesArr = await response.json();
-	// 		return countriesArr;
-	// 	} catch (err) {
-	// 		return Promise.reject(err);
-	// 	}
-	// }
 	async cities() {
 		try {
 			const response = await fetch(`${this.url}/cities`);
