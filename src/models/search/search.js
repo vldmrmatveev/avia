@@ -1,6 +1,9 @@
 import autoComplete from "@tarekraafat/autocomplete.js";
 import { location } from "@models/store/store";
-import { parseContent } from "@models/search-result/search-result";
+import {
+	parseContent,
+	parseFavoriteCard,
+} from "@models/search-result/search-result";
 
 const citiesList = location.init().then(() => {
 	return location.cities;
@@ -103,6 +106,7 @@ export function createForm() {
 	new autoComplete(autoCompleteOptions("[name='to']", "Куда..."));
 
 	const formUi = new FormUI("searchTickets");
+	const cardContainer = document.querySelector(".card-container");
 
 	getStartDate(formUi.dateFrom);
 
@@ -114,9 +118,42 @@ export function createForm() {
 
 	formUi.form.addEventListener("submit", (e) => {
 		e.preventDefault();
-		document.querySelector(".card-container").innerHTML = "";
+		cardContainer.innerHTML = "";
 		formUi.formSubmit().then(() => {
-			parseContent(location.lastSearch.data);
+			parseContent(Object.values(location.lastSearch.data));
 		});
 	});
+
+	cardContainer.addEventListener("click", (e) => {
+		addToFavorite(e);
+	});
+}
+
+function addToFavorite(e) {
+	const favoriteContainer = document.querySelector(".container-favorite");
+	if (e.target.tagName === "BUTTON") {
+		e.target.classList.toggle("active");
+		const arrOfResult = Object.values(location.lastSearch.data);
+		if (e.target.classList.contains("active")) {
+			location.favorites.push(arrOfResult[e.target.dataset.id]);
+			console.log(location.favorites);
+		} else {
+			location.favorites.forEach((item, i) => {
+				if (
+					JSON.stringify(item) ===
+					JSON.stringify(arrOfResult[e.target.dataset.id])
+				) {
+					location.favorites.splice(i, 1);
+				}
+			});
+		}
+		if (location.favorites.length > 0) {
+			favoriteContainer.style.display = "block";
+			favoriteContainer.innerHTML = "";
+			parseFavoriteCard(location.favorites);
+		} else {
+			favoriteContainer.innerHTML = "";
+			favoriteContainer.style.display = "none";
+		}
+	}
 }

@@ -104,6 +104,7 @@ $cyanColor: rgb(49, 141, 141);
 		font-weight: bold;
 		transition: 0.2s ease all;
 		cursor: pointer;
+		min-width: 100px;
 		&:hover {
 			background-color: darken($color: $cyanColor, $amount: 3);
 		}
@@ -140,8 +141,7 @@ $cyanColor: rgb(49, 141, 141);
 		margin-bottom: 1rem;
 		border-radius: 8px;
 		box-sizing: border-box;
-		margin-left: 10px;
-		margin-right: 10px;
+		background-color: rgba(240, 248, 255, 0.2);
 		@media (max-width: 576px) {
 			padding: 1rem;
 		}

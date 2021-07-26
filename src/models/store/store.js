@@ -5,6 +5,7 @@ class Location {
 		this.api = api;
 		this.cities = null;
 		this.lastSearch = {};
+		this.favorites = [];
 	}
 	async fetchTickets(params) {
 		const response = await this.api.prices(params);

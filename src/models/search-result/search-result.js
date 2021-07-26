@@ -1,11 +1,16 @@
 export function parseContent(data) {
-	const resultList = Object.values(data);
-	resultList.forEach((item) => {
-		createDOMElement(item);
+	data.forEach((item, index) => {
+		createDOMElement(item, index);
 	});
 }
 
-function createDOMElement(item) {
+export function parseFavoriteCard(data) {
+	data.forEach((item) => {
+		createFavoriteCard(item);
+	});
+}
+
+function createDOMElement(item, index) {
 	const fragment = document.createDocumentFragment();
 	const card = document.createElement("div");
 	card.classList.add("card-item");
@@ -19,6 +24,7 @@ function createDOMElement(item) {
 	const to = document.createElement("span");
 	to.textContent = item.destination;
 	const between = document.createElement("span");
+	between.textContent = " - ";
 	const price = document.createElement("p");
 	const dateFrom = document.createElement("p");
 	const dateFromText = document.createElement("span");
@@ -36,11 +42,41 @@ function createDOMElement(item) {
 	dateTo.append(dateToText, dateToMain);
 	price.classList.add("card-item-price");
 	price.textContent = `${item.price} ₽`;
-	between.textContent = " - ";
+	const button = document.createElement("button");
+	button.setAttribute("data-id", index);
+	button.classList.add("card-item-btn");
+	const imgBtn = document.createElement("img");
+	imgBtn.setAttribute("src", "img/upload/star.svg");
+	button.append(imgBtn);
+	button.textContent;
 	title.append(from, between, to);
-	card.append(img, title, dateFrom, dateTo, price);
+	card.append(img, title, dateFrom, dateTo, price, button);
 	fragment.append(card);
 	document.querySelector(".card-container").append(fragment);
+}
+
+function createFavoriteCard(item) {
+	const fragment = document.createDocumentFragment();
+	const card = document.createElement("div");
+	card.classList.add("card-item-min");
+	const img = document.createElement("img");
+	img.classList.add("card-item-img");
+	img.setAttribute("src", `https://pics.avs.io/200/200/${item.airline}.png`);
+	const title = document.createElement("h4");
+	title.classList.add("card-item-title");
+	const from = document.createElement("span");
+	from.textContent = item.origin;
+	const to = document.createElement("span");
+	to.textContent = item.destination;
+	const between = document.createElement("span");
+	const price = document.createElement("p");
+	price.classList.add("card-item-price", "card-item-price-yellow");
+	price.textContent = `${item.price} ₽`;
+	between.textContent = " - ";
+	title.append(from, between, to);
+	card.append(img, title, price);
+	fragment.append(card);
+	document.querySelector(".container-favorite").append(fragment);
 }
 
 function transformDate(value) {

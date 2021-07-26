@@ -2,7 +2,7 @@
 	&-container {
 		display: flex;
 		flex-wrap: wrap;
-		width: 100%;
+		margin: 0 -10px;
 	}
 	&-item {
 		flex-basis: 0;
@@ -11,17 +11,61 @@
 		margin: 10px;
 		border: 1px solid lightblue;
 		padding: 1rem;
-		min-width: 250px;
+		min-width: 236px;
 		box-sizing: border-box;
+		position: relative;
+		background-color: rgba(240, 248, 255, 0.2);
+		&-min {
+			padding: 1rem;
+			border-radius: 10px;
+			background-color: floralwhite;
+			margin-bottom: 15px;
+			border: 1px solid sandybrown;
+		}
 		&-title {
 			font-size: 1.2rem;
 			font-weight: 600;
+		}
+		&-btn {
+			position: absolute;
+			right: 15px;
+			top: 15px;
+			width: 40px;
+			height: 40px;
+			padding: 5px;
+			border-radius: 100%;
+			background-color: antiquewhite;
+			transition: 0.2s ease all;
+			border: none;
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			img {
+				width: 22px;
+				height: 22px;
+				object-fit: contain;
+				object-position: center;
+				pointer-events: none;
+			}
+			&.active {
+				background-color: crimson;
+				&:hover {
+					background-color: crimson;
+				}
+			}
+			&:hover {
+				background-color: lightcoral;
+			}
 		}
 		&-price {
 			background-color: lightskyblue;
 			padding: 6px 13px;
 			border-radius: 15px;
 			display: inline-block;
+			&-yellow {
+				background-color: antiquewhite;
+			}
 		}
 		&-img {
 			height: 80px;

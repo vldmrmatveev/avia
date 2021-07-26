@@ -8,9 +8,27 @@ body {
 }
 
 .container {
-	padding: 2rem;
 	max-width: 1000px;
 	margin: 0 auto;
 	display: flex;
-	flex-wrap: wrap;
+	&-favorite {
+		width: 300px;
+		min-width: 250px;
+		padding: 2rem 1rem;
+		display: none;
+		@media (max-width: 768px) {
+			order: 1;
+			width: initial;
+			min-width: initial;
+		}
+	}
+	&-block {
+		padding: 2rem 1rem;
+		@media (max-width: 768px) {
+			order: 2;
+		}
+	}
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
 }
